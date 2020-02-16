@@ -35,13 +35,12 @@ CMD ["start-notebook.sh"]
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
 
-RUN conda install -c conda-forge pyodbc 
-
 # Install packages
-RUN conda install --quiet --yes \
+RUN conda install --quiet --yes --channel conda-forge \
     'jupyter_contrib_nbextensions=0.5.1' \
-    'pyodbc=4.0.27' \
-	'geopandas=0.6.0' \
+    'pyodbc=4.0.28' \
+	'geopandas=0.6.3' \
+	'folium=0.10.1' \
     && \
     conda clean --all -f -y && \
     fix-permissions $CONDA_DIR && \
