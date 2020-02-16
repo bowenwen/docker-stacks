@@ -1,0 +1,73 @@
+version: "3.6"
+
+services:
+    web:
+      image: 'gitlab/gitlab-ce:latest'
+      container_name: "gitlab"
+      restart: always
+      hostname: 'localhost'
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'http://localhost';
+          gitlab_rails['initial_root_password'] = 'test';
+          gitlab_rails['time_zone'] = 'America/Vancouver';
+          gitlab_rails['gitlab_default_theme'] = 7;
+          gitlab_rails['manage_backup_path'] = false;
+          gitlab_rails['backup_path'] = '/etc/gitlab/gitlab-backup';
+          gitlab_rails['usage_ping_enabled'] = false;
+      ports:
+        - '80:80'
+        - '11443:443'
+        - '11022:22'
+      volumes:
+        - '/d/docker/dockergitlab/srv/gitlab/config:/etc/gitlab'
+        - 'gitlab-logs:/var/log/gitlab'
+        - 'gitlab-data:/var/opt/gitlab'
+    gitlab-runner:
+      image: gitlab/gitlab-runner:alpine
+      container_name: gitlab-runner
+      restart: always
+      volumes:
+        - '/d/docker/dockergitlab/srv/gitlab-runner/config:/etc/gitlab-runner'
+        - '/d/docker/dockergitlab/srv/gitlab-runner/var/run/docker.sock:/var/run/docker.sock'
+
+volumes:
+  gitlab-logs:
+  gitlab-data:
+
+# volume mounting issue workaround
+## do the following as suggested in Issue 2280
+## https://gitlab.com/gitlab-org/omnibus-gitlab/issues/2280
+## https://gitlab.com/gitlab-org/omnibus-gitlab/issues/2976
+# docker-compose up -d
+## note `gitlab-logs` and `gitlab-data` are named volumes but not mounted to host
+## run the following to backup` data to mounted volume `/etc/gitlab/gitlab-backup`
+### https://docs.gitlab.com/ee/raketasks/backup_restore.html#restore-for-docker-image-and-gitlab-helm-chart-installations
+# docker exec -it gitlab gitlab-rake gitlab:backup:create
+# docker exec -it gitlab gitlab-rake gitlab:backup:restore
+
+## reconfigure
+### https://docs.gitlab.com/ee/administration/restart_gitlab.html#omnibus-gitlab-reconfigure
+# docker exec -it gitlab gitlab-ctl reconfigure
+
+# resources: 
+#https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose
+#https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose
+#https://docs.gitlab.com/omnibus/settings/configuration.html#configuring-runtime-directory
+#https://docs.gitlab.com/ee/install/structure.html
+#https://docs.gitlab.com/ee/administration/auth/how_to_configure_ldap_gitlab_ce/index.html
+#https://docs.gitlab.com/omnibus/README.html
+#https://docs.gitlab.com/ee/raketasks/backup_restore.html
+#https://gitlab.com/gitlab-org/gitlab-ce/issues/43585
+#https://docs.gitlab.com/ee/workflow/timezone.html
+#docker exec -it gitlab gitlab-rake time:zones:all
+#docker exec -it gitlab gitlab-rake time:zones[CA]
+
+# resources on runner:
+# register gitlab-runner
+# docker exec -it gitlab-runner gitlab-runner register
+#https://docs.gitlab.com/runner/
+#https://blog.programster.org/deploy-gitlab-runner-with-docker
+
+# logos from
+#https://translinkstore.ca/

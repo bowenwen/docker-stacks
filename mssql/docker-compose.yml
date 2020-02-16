@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  mssqlsvr:
+    container_name: dockermssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    #mcr.microsoft.com/mssql/server:2019-CTP3.2-ubuntu
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=4Y41VaJ9wZWb
+      - MSSQL_PID=Express
+      - MSSQL_TCP_PORT=1433
+      - MSSQL_DATA_DIR=/usr/src/mssql/data
+      - MSSQL_LOG_DIR=/usr/src/mssql/log
+      - MSSQL_DUMP_DIR=/usr/src/mssql/dump
+      - MSSQL_MASTER_DATA_FILE=/usr/src/mssql/data/master.mdf
+      - MSSQL_MASTER_LOG_FILE=/usr/src/mssql/log/mastlog.ldf
+      - MSSQL_ERROR_LOG_FILE=/usr/src/mssql/log/err
+    volumes:
+      - D:/docker/dockermssql/data:/usr/src/mssql
+      #- D:/docker/dockermssql/data:/var/opt/mssql
+      

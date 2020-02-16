@@ -1,0 +1,24 @@
+version: "3"
+services:
+  datascience-notebook:
+    image: bowenwen/biogeme:latest
+    volumes:
+      - C:/Users/bwen/Desktop/working:/home/jovyan/work
+    restart: always
+    ports:
+      - "8888:8888"
+    user: root
+    environment:
+    #  - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+      - NB_USER=jovyan
+      - NB_UID=1000
+    container_name: dsnb
+    command: jupyter notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.password="sha1:c89567cb3c15:1062939cf3cf2359f7a3876a5ecaa948ca5cccd5"
+#    networks:
+#      hostnet: {}
+#
+#networks:
+#  hostnet:
+#    external: true
+#    name: host
