@@ -39,8 +39,12 @@ USER $NB_UID
 RUN conda install --quiet --yes --channel conda-forge \
     'jupyter_contrib_nbextensions=0.5.1' \
     'pyodbc=4.0.28' \
-	'geopandas=0.6.3' \
-	'folium=0.10.1' \
+    'geopandas=0.6.3' \
+    'folium=0.10.1' \
+    'holoviews=1.12.7' \
+    'geoviews=1.6.6' \
+    'bokeh=1.4.0' \
+    'datashader=0.10.0' \
     && \
     conda clean --all -f -y && \
     fix-permissions $CONDA_DIR && \
