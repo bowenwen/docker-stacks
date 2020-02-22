@@ -1,0 +1,19 @@
+version: "3"
+services:
+  datascience-dpl:
+    image: bowenwen/deeplearning:latest
+    volumes:
+      - C:/Users/bwen/Desktop/working:/home/jovyan/work
+    restart: always
+    ports:
+      - "8889:8888"
+    user: root
+    environment:
+    #  - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+      - NB_USER=jovyan
+      - NB_UID=1000
+    container_name: dsnb_dpl
+    command: jupyter notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.password="sha1:c89567cb3c15:1062939cf3cf2359f7a3876a5ecaa948ca5cccd5"
+
+# https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password
