@@ -6,6 +6,7 @@ Docker images and recipes with additional packages and extensions for on-the-go 
 See [Jupyter docker-stacks]
 
 * `pynb` - Python Jupyter Notebook: An image with some of my favorite packages in Python (that aren't part of the Jupyter Docker stack).
+* 'deeplearning`: An image with some common deep learning packages such as tensorflow, pytorch, keras, etc.
 * `biogeme`: [Biogeme] is an open source Python package for Econometric Modeling.
 
 ## Rocker based images
@@ -19,6 +20,7 @@ See [Rocker versioned] and [Rocker geospatial]
 * `portainer`: See [Portainer]
 * `gogs`: See [Gogs for Docker]
 * `gitLab`: See [GitLab Community Edition for Docker]
+* `pishrink`: A tool from [Drewsif/PiShrink] that shrinks the size of a raspbian image for raspberry pi
 
 
 <!-- Links -->
@@ -31,3 +33,4 @@ See [Rocker versioned] and [Rocker geospatial]
 [GitLab Community Edition for Docker]: https://hub.docker.com/r/gitlab/gitlab-ce/
 [Biogeme]: https://biogeme.epfl.ch/install.html
 [Cancensus]: https://github.com/mountainMath/cancensus
+[Drewsif/PiShrink] https://github.com/Drewsif/PiShrink
