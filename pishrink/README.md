@@ -16,14 +16,17 @@ docker build -t pishrink .
 ```
 
 ### Run pishrink
+
 ``` bash
-docker run -v ${PWD}:/home/root -it bowenwen/pishrink:latest imagefile.img [newimagefile.img]
+docker run -v ${PWD}:/root -it --rm --privileged bowenwen/pishrink:latest [-sdrzh] imagefile.img [newimagefile.img]
   -s: Skip autoexpand
   -d: Debug mode on
   -r: Use advanced repair options
   -z: Gzip compress image after shrinking
   -h: display help text
 ```
+
+Docker containers by default cannot mount new filesystems, so `--privileged` is required to run the pishrink program.
 
 <!-- Links -->
 [Drewsif/PiShrink]: https://github.com/Drewsif/PiShrink
