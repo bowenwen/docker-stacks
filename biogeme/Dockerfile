@@ -30,7 +30,7 @@ RUN pip install --upgrade \
 	'unidecode' \
 	&& \
 	pip install \
-    'biogeme==3.2.5' &&\
+    'biogeme==3.2.8' &&\
     conda clean --all -f -y && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
