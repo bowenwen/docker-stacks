@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=jupyter/datascience-notebook:python-3.7.6
+ARG BASE_CONTAINER=jupyter/datascience-notebook:python-3.8.8
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Bo Wen <admin@bowenwen.com>"
@@ -30,7 +30,7 @@ RUN pip install --upgrade \
 	'unidecode' \
 	&& \
 	pip install \
-    'biogeme==3.2.5' &&\
+    'biogeme==3.2.8' &&\
     conda clean --all -f -y && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
