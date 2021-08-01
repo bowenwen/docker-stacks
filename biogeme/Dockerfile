@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=jupyter/datascience-notebook:python-3.7.6
+ARG BASE_CONTAINER=jupyter/datascience-notebook:python-3.8.11
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Bo Wen <admin@bowenwen.com>"
